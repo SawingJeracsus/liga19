@@ -539,4 +539,4 @@ var id = setInterval(function(){
     clearInterval(id);
   }
 
-}, 100)
+}, 100) //Запунскаємо перевірку на закінчення гри
