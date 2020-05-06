@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap&subset=cyrillic');
+*{
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+.fighters{
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  background-color: #607D8B;
+  min-height: 100vh;
+}
+.fighter{
+  width: 40vw;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #CFD8DC;
+}
+#console{
+  background-color: #757575;
+  height: 100vh;
+  width: 20vw;
+  padding: 20px;
+  overflow: scroll;
+}
+.fighter_portret{
+  height: 300px;
+}
+.atak{
+  margin-bottom: 20px;
+  width: 25vw;
+  height: 25px;
+}
+.atak_btn{
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  background-color: #FFA000;
+  color: #fff;
+}
+.hp-bar__container{
+  width: 25vw;
+  height: 25px;
+  margin: 10px 0;
+}
+#status_bar1, #status_bar2{
+  height: 40px;
+  min-width: 25vw;
+  margin: 10px 0;
+  padding: 3px;
+  border-radius: 4px;
+  background-color: #232323;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.status {
+  background-color: #fff;
+  text-align: center;
+  font-weight: bold;
+  min-width: 50px;
+  padding: 2px;
+  border-radius: 4px;
+}
+#hp_container1, #hp_container2{
+  height: inherit;
+  width: inherit;
+}
+button[disabled="disabled"]{
+  background-color: #c9c9c9;
+}
+#end{
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  /* font-size: 3em; */
+}
+#gameconsoleResult{
+  font-size: 17px;
+}
