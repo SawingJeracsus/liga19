@@ -27,6 +27,31 @@ class Inventory {
           field.setItem(item);
           success = true;
         } catch (e) {
+          if (e == 'Max count') {
+            this.pushItemWithOutSlug(item);
+            return true;
+          }
+          console.error(e);
+          return false;
+          success = false;
+        }
+        field.item.setElement();
+        return true;
+      }
+    }
+    if(!success){
+      return false;
+    }
+  }
+  pushItemWithOutSlug(item){
+    for(let fieldID in this.fields){
+      let field = this.fields[fieldID];
+      var success = false;
+      if(!field.haveItem()){
+        try {
+          field.setItem(item);
+          success = true;
+        } catch (e) {
           console.error(e);
           return false;
           success = false;
@@ -96,6 +121,9 @@ class Inventory {
                   if(count >= fieldBackup.count){
                     fieldBackup.setCount(count);
                   }
+                }else if (e == 'Max count') {
+                  console.log('here we go');
+                  this.pushItemWithOutSlug(item);
                 }
                 return false;
                 success = false;
@@ -148,13 +176,17 @@ class Field {
   setItem(item, count = 1){
     if(typeof item === 'object'){
       if(this.haveItem()){
-        let itemBackup = this.item;
-        if(this.item.slug == item.slug){
-          // console.log(item.slug);
-          this.count += count;
-          this.item = itemBackup;
+        if (item.maxCount > this.count) {
+          let itemBackup = this.item;
+          if(this.item.slug == item.slug){
+            // console.log(item.slug);
+            this.count += count;
+            this.item = itemBackup;
+          }else{
+            throw 'Items no same!'
+          }
         }else{
-          throw 'Items no same!'
+           throw 'Max count'
         }
       }else{
         this.count += count;
@@ -230,10 +262,11 @@ class Field {
 
 }
 class Item {
-  constructor(id, slug, maxCount = 5, imgSrc) {
+  constructor(id, slug, maxCount, imgSrc) {
     this.id = id;
     this.img = imgSrc;
     this.slug = slug;
+    this.maxCount = maxCount;
     this.html = "<p class='item' data-slug = '"+this.slug+"' id='"+this.slug+"-"+id+"'><img src = '"+imgSrc+"'></p>"
   }
   updateHtml(){
