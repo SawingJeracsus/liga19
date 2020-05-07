@@ -45,8 +45,3 @@
   color: #fff;
   cursor: pointer;
 }
-@media screen and (min-width: 900px) {
-  .form-wrapper{
-    width: 90vw;
-  }
-}
