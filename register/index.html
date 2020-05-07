@@ -15,15 +15,17 @@
   <div class="main">
     <form action="#">
       <div class="form-wrapper">
+        <p id="erorr"></p>
         <h1 id="title">Вітаю, <p id="playername">Друже</p></h1>
-        <input type="text" placeholder="Нікнейм...">
-        <input type="text" placeholder="Логін...">
-        <input type="password" placeholder="Пароль...">
-        <input type="password" placeholder="Пароль(ще раз)...">
-        <input type="text" placeholder="Email...">
-        <button id="register_submit"type="submit">Вперед!</button>
+        <input type="text" placeholder="Нікнейм..." name="nickname" id="nickname">
+        <input type="text" placeholder="Логін..." name="login" id="login">
+        <input type="password" placeholder="Пароль..." name="password" id="password">
+        <input type="password" placeholder="Пароль(ще раз)..." name="password_repyt" id="password_repyt">
+        <input type="text" placeholder="Email..." name="email" id="email">
+        <button class="register_submit" type="submit" disabled id="go">Вперед!</button>
       </div>
     </form>
   </div>
+  <script src='js/js.js'></script>
 </body>
 </html>

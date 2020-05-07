@@ -36,7 +36,16 @@
 #title{
   text-align: center;
 }
-#register_submit{
+.register_submit{
+  width: 60%;
+  padding: 4px;
+  font-weight: bold;
+  border:none;
+  background-color: #c9c9c9;;
+  color: #fff;
+  cursor: no-drop;
+}
+.register_submit.active{
   width: 60%;
   padding: 4px;
   font-weight: bold;
@@ -44,4 +53,11 @@
   background-color: #4CAF50;;
   color: #fff;
   cursor: pointer;
+}
+button[disabled="disabled"]{
+  background-color: #c9c9c9;
+}
+#erorr{
+  font-weight: bold;
+  color: #f00;
 }
