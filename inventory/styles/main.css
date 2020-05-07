@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Jost&display=swap');
 *{
   padding: 0;
   margin: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Jost', sans-serif;
 }
 #inventory-tabd__wrapper{
   display: -webkit-flex;
@@ -78,4 +82,30 @@
     width: 16vw;
     height: 16vw;
   }
+}
+#view{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 123;
+  height: 20vh;
+  width: 100vw;
+  background-color: #eee;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#view_img, #view_img img, #view_info, #money{
+  height: inherit;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#view_info {
+  background-color: #c9c9c9;
+  width: 60vw;
 }

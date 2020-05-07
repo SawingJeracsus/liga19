@@ -46,7 +46,19 @@
     <div class="inventory__field"></div>
     <div class="inventory__field"></div>
   </div>
+  <div id="view">
+    <div id="view_img">
+      <!-- <p class="item" data-slug="apple" id="apple-6"><img src="img/apple.webp"></p> -->
+    </div>
+    <div id="view_info">
+      <p id="view_text_wrapper">
 
+      </p>
+    </div>
+    <div id="money">
+      9999$
+    </div>
+  </div>
 
   <script src = "js/inventory.js"></script>
 </body>
