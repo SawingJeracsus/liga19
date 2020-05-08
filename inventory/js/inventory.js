@@ -68,6 +68,13 @@ class Inventory {
       return false;
     }
   }
+  setMoney(amount){
+    this.money = amount;
+    this.view_money.html(this.money+"$");
+  }
+  addMoney(amount){
+    this.setMoney(this.money+amount)
+  }
   up(e){
     for(let fieldID in this.fields){
       let field = this.fields[fieldID];
@@ -148,6 +155,7 @@ class Inventory {
       let field = this.fields[fieldID];
       arrayForReturn.push(field.save());
     }
+    arrayForReturn.push({money: this.money})
     return JSON.stringify(arrayForReturn);
   }
   restore(json){
@@ -155,7 +163,11 @@ class Inventory {
     for(let fieldID in arrayForRestore){
       let field = this.fields[fieldID];
       let fieldData = arrayForRestore[fieldID];
-      field.restore(fieldData)
+      if(fieldData.money != undefined){
+        field.restore(fieldData)
+      }else{
+        this.setMoney(fieldData.money)
+      }
     }
   }
 }
