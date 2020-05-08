@@ -1,0 +1,21 @@
+*{
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.map_wrapper{
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: #131313;
+}
+.point{
+  position: absolute;
+  top: 50vh ;
+  left: 50vw;
+}
