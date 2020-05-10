@@ -19,3 +19,12 @@
   top: 50vh ;
   left: 50vw;
 }
+.img{
+  position: relative;
+}
+.admin_instruments{
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  z-index: 99;
+}
