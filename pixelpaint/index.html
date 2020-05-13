@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="fontawesome\css\all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/master.css">
+  <title>Намалюй</title>
+</head>
+<body>
+  <div class="main">
+    <div class="content__wrapper">
+      <div class="canvas__wrapper">
+        <canvas id="canvas">Your browser don`t support that... Please update him!</canvas>
+      </div>
+      <div class="instruments_panel">
+        <button class="instrument" id="draw"><i class="fa fa-pen"></i> Малювання</button>
+        <button class="instrument" id="eraser"><i class="fa fa-eraser"></i> Стирачка</button>
+        <button class="instrument" id="palette"><i class="fa fa-palette"></i> Вибір кольору</button>
+      </div>
+    </div>
+  </div>
+  <div id="palette_container">
+  </div>
+  <div id="filter"></div>
+  <script src="js/draw.js"></script>
+</body>
+</html>
