@@ -4,6 +4,7 @@ class CanvasDrawing {
         this.ctx = this.cnv.getContext('2d');
         this.config = config;
         this.instruments = instruments;
+        this.fields = [];
         this.hand = {slug: null};
 
         this.mousemoving = false;
@@ -37,20 +38,40 @@ class CanvasDrawing {
         if(this.instruments.eraser != undefined){
             this.instruments.eraser.init = () => { this.setInstrumentInHand(this.instruments.eraser)}
         }
-        if(this.instruments.palette != undefined){
-            this.instruments.palette.init = () => { this.setColor()}
+        if(this.instruments.palette != undefined && this.instruments.palette_container != undefined){
+            this.instruments.palette.init = () => { this.instruments.palette_container.show() }
         }
+        if(this.instruments.palette_container != undefined){
+            this.instruments.palette_container.init = () => {this.instruments.palette.el.setAttribute('style', `background-color: ${this.instruments.palette_container.lastColor}; border: 2px solid ${this.instruments.palette_container.lastColor};`)}
+        }
+
     }
 
+    save(){
+        return JSON.stringify(this.fields);
+    }
+
+    restore(json){
+        try {
+            var restoring = JSON.parse(json)
+        }catch (e) {
+            console.error(e);
+            return false;
+        }
+
+        for(let fieldID in restoring){
+            let field = restoring[fieldID];
+
+            this.drawFieldByCords(field.x,field.y,field.color);
+        }
+    }
     setInstrumentInHand(instrument){
         if(this.hand.slug != null && this.hand != instrument){
             this.hand.removeSelect();
         }
         this.hand = instrument;
     }
-    setColor(){
 
-    }
     drawHorisontalLine(y){
         this.ctx.beginPath();
         this.ctx.strokeStyle = '#c9c9c9';
@@ -103,12 +124,28 @@ class CanvasDrawing {
         this.ctx.fillRect((x-1)*(this.cnv.width / this.colCount), (y-1)*(this.cnv.height / this.rowCount), this.cnv.width / this.colCount, this.cnv.height / this.rowCount)
         this.ctx.fillStyle = color;
         this.ctx.fillRect((x-1)*(this.cnv.width / this.colCount)+1, (y-1)*(this.cnv.height / this.rowCount)+1, this.cnv.width / this.colCount-1, this.cnv.height / this.rowCount-1)
+
+        let fieldbindet = false;
+        for (let fieldID in this.fields){
+            let field = this.fields[fieldID];
+            if(field.x === x && field.y === y && field.color === color){
+                fieldbindet = true
+            }
+        }
+        if(!fieldbindet){
+            this.fields.push({
+                x: x,
+                y: y,
+                color: color
+            })
+        }
+
     }
     mouseDownHandler(e){
         if(this.hand.slug === 'draw'){
             if(e.path[0] === this.cnv){
                 let cords = this.getCordsByField(e.clientX, e.clientY);
-                this.drawFieldByCords(cords.x, cords.y);
+                this.drawFieldByCords(cords.x, cords.y, this.instruments.palette_container.lastColor);
             }
         }
         if(this.hand.slug === 'eraser'){
@@ -123,7 +160,7 @@ class CanvasDrawing {
         if(this.hand.slug === 'draw'){
             if(e.path[0] === this.cnv){
                 let cords = this.getCordsByField(e.clientX, e.clientY);
-                this.drawFieldByCords(cords.x, cords.y);
+                this.drawFieldByCords(cords.x, cords.y, this.instruments.palette_container.lastColor);
             }
         }
         if(this.hand.slug === 'eraser'){
@@ -164,29 +201,48 @@ class Instrument {
 }
 
 class Palette {
-    constructor(el) {
+    constructor(el, filter) {
         this.el = document.getElementById(el);
+        this.filterEl = document.getElementById(filter);
         this.colors = [];
         this.count = 0;
+        this.lastColor = '#000';
+
+        this.filterEl.addEventListener('click', () => {
+            this.hide();
+        })
+
     }
     show(){
-        this.el.setAttribute('style', `visibility: visible;`)
+        this.el.setAttribute('style', `visibility: visible;`);
+        this.filterEl.setAttribute('style', `visibility: visible;`);
+
+        for(let colorID in this.colors){
+            let color = this.colors[colorID];
+            color.rebindEL();
+        }
     }
     hide(){
         try {
             this.el.removeAttribute('style');
+            this.filterEl.removeAttribute('style');
         }catch (e) {
             console.erorr('Ellement is allready hidden');
         }
     }
-    addColor(color){
+    addColor(color, textColor = "#000"){
         this.count++;
-        this.el.innerHTML = this.el.innerHTML + `<span class="color" id="color-${this.count}" style="background-color: ${color};">1</span>`
-        this.colors.push({
+        this.el.innerHTML = this.el.innerHTML + `<span class="color" id="color-${this.count}" style="background-color: ${color}; color: ${textColor};">1</span>`;
+        let id = this.colors.push(new Color({
             color: color,
-            amount: 1,
             id: 'color-'+this.count
-        })
+        })) - 1;
+
+        this.colors[id].init = () => {
+            this.lastColor = this.colors[id].color;
+            this.init();
+            this.hide();
+        }
 
         return 'color-'+this.count;
     }
@@ -197,9 +253,7 @@ class Palette {
                 if(color.id === id){
                     color.amount += amount;
                     this.colors[colorID] = color;
-
-                    let el = document.getElementById(color.id);
-                    el.innerHTML = color.amount;
+                    color.el.innerHTML = color.amount;
                 }
             }
         }
@@ -209,13 +263,40 @@ class Palette {
             let color = this.colors[colorID];
             if(color != null){
                 if(color.id === id){
-                    let el = document.getElementById(color.id);
-                    el.remove();
-
+                    color.el.remove();
                     this.colors[colorID] = null;
                 }
             }
         }
+    }
+    init(){
+
+    }
+
+}
+class Color{
+    constructor(config = {}) {
+        this.config = config;
+
+        this.color = config.color;
+        this.amount = 1;
+        this.el = document.getElementById(config.id);
+        this.id = config.id;
+
+        this.setListener();
+
+    }
+    rebindEL(){
+        this.el = document.getElementById(this.id);
+        this.setListener();
+    }
+    setListener(){
+        this.el.addEventListener('click', () => {
+            this.init();
+        })
+    }
+    init(){
+        return null;
     }
 }
 var canvas = new CanvasDrawing('canvas', {
@@ -224,5 +305,10 @@ var canvas = new CanvasDrawing('canvas', {
     draw: new Instrument('draw', 'draw'),
     eraser: new Instrument('eraser', 'eraser'),
     palette: new Instrument('palette', 'palette'),
-    palette_container: new Palette('palette_container')
+    palette_container: new Palette('palette_container', 'filter')
 });
+
+
+canvas.instruments.palette_container.addColor('#000', '#eee')
+canvas.instruments.palette_container.addColor('#f00')
+canvas.instruments.palette_container.addColor('#f0f')
