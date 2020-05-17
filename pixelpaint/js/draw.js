@@ -114,7 +114,7 @@ class CanvasDrawing {
 
         let fieldCords = {
             x: Math.ceil(x / fieldWidth ),
-            y: Math.ceil(y / fieldHeight ) + 1,
+            y: Math.ceil(y / fieldHeight ) + 2,
         }
 
         return fieldCords;
@@ -300,7 +300,7 @@ class Color{
     }
 }
 var canvas = new CanvasDrawing('canvas', {
-    numRows: 20,
+    numRows: 50,
 }, {
     draw: new Instrument('draw', 'draw'),
     eraser: new Instrument('eraser', 'eraser'),
