@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+body{
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff59d;
+}
+section{
+    width: 80vw;
+    background-color: #ffee58;
+}
+
+.info_block1__wrapper, .info_block2__wrapper, .actions{
+    font-family: 'Press Start 2P', cursive;
+    justify-content: space-between;
+    display: flex;
+    align-items: start;
+    height: 500px;
+    padding: 24px;
+    margin-bottom: 10vh;
+}
+.actions{
+    height: 100px;
+}
+.title{
+    height: 20%;
+    background-color: #f9fbe7;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.stats{
+    height: 70%;
+    background-color: #f9fbe7;
+    padding: 12px;
+    min-width: 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 40px;
+}
+.stat__block{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffee58;
+    transition: 0.3s;
+}
+.stat__block:hover{
+    border-bottom: 5px solid #111;
+    background-color: #fdd835;
+}
+.info__wrapper, .achive_list__wrapper, .trophys{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+.achive_list__wrapper, .trophys{
+    background-color: #f9fbe7;
+    width: 40%;
+    padding: 30px;
+}
+.profile_photo_wrapper{
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+.profile_photo_wrapper img{
+    height: 100%;
+}
+
+.action{
+    border: none;
+    width: 48%;
+    height: 100%;
+    background-color: #232323;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    transition: 0.3s;
+}
+#report:hover{
+    background-color: #D32F2F;
+}
+#report{
+    background-color: #F44336;
+}
+#toggleActionList{
+    background-color: #ffab00;
+}
+#toggleActionList:hover{
+    background-color: #fb8c00;
+}
+
+@media screen and (max-width: 1100px) {
+    .info_block1__wrapper, .info_block2__wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: 200vh;
+    }
+    .achive_list__wrapper, .trophys{
+        width: 100%;
+        height: 90vh;
+    }
+    .profile_photo_wrapper{
+        margin-bottom: 34px;
+    }
+    .stat__block{
+        height: 50px;
+    }
+}
