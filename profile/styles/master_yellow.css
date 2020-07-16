@@ -12,11 +12,11 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #00897b;
+    background-color: #fff59d;
 }
 section{
     width: 80vw;
-    background-color: #00695c;
+    background-color: #ffee58;
 }
 
 .info_block1__wrapper, .info_block2__wrapper, .actions{
@@ -33,7 +33,7 @@ section{
 }
 .title{
     height: 20%;
-    background-color: #b2dfdb;
+    background-color: #f9fbe7;
     width: 100%;
     display: flex;
     align-items: center;
@@ -41,7 +41,7 @@ section{
 }
 .stats{
     height: 70%;
-    background-color: #004d40;
+    background-color: #f9fbe7;
     padding: 12px;
     min-width: 500px;
     display: grid;
@@ -54,13 +54,12 @@ section{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #3949ab;
+    background-color: #ffee58;
     transition: 0.3s;
 }
 .stat__block:hover{
-    border-bottom: 5px solid #fff;
-    background-color: #1a237e;
-    color: #fff;
+    border-bottom: 5px solid #111;
+    background-color: #fdd835;
 }
 .info__wrapper, .achive_list__wrapper, .trophys{
     display: flex;
@@ -70,7 +69,7 @@ section{
     height: 100%;
 }
 .achive_list__wrapper, .trophys{
-    background-color: #b2dfdb;
+    background-color: #f9fbe7;
     width: 40%;
     padding: 30px;
 }
@@ -84,8 +83,8 @@ section{
 }
 
 .action{
-    outline: none;
     border: none;
+    outline: none;
     width: 48%;
     height: 100%;
     background-color: #232323;
@@ -101,10 +100,10 @@ section{
     background-color: #F44336;
 }
 #toggleActionList{
-    background-color: #1a237e;
+    background-color: #ffab00;
 }
 #toggleActionList:hover{
-    background-color: #283593;
+    background-color: #fb8c00;
 }
 
 @media screen and (max-width: 1100px) {
